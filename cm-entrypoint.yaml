@@ -1,0 +1,23 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: entrypoint
+  labels:
+    app: default-init
+data:
+  entrypoint.sh: |
+    #!/usr/bin/env bash
+    set -euo pipefail
+    ROOT_MOUNT_DIR="${ROOT_MOUNT_DIR:-/}"
+    echo "Starting iSCSI"
+    /usr/bin/nsenter -m/proc/1/ns/mnt -- systemctl enable --now iscsid
+
+    echo "Setting hugepages"
+    /usr/bin/nsenter -m/proc/1/ns/mnt -- sysctl -w vm.nr_hugepages=512
+
+    echo "Restarting kubelet"
+    /usr/bin/nsenter -m/proc/1/ns/mnt -- systemctl restart kubelet
+    
+
+

@@ -1,0 +1,11 @@
+apiVersion: gcp.crossplane.io/v1alpha3
+kind: Provider
+metadata:
+  name: gcp-provider
+spec:
+  # replace this with your own gcp project id
+  projectID: steady-service-269616 
+  credentialsSecretRef:
+    namespace: crossplane-system
+    name: gcp-creds
+    key: key

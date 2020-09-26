@@ -1,0 +1,20 @@
+apiVersion: container.gcp.crossplane.io/v1alpha1
+kind: NodePool
+metadata:
+  name: mayastor-nodepool
+  namespace: default
+spec:
+  providerRef:
+    name: gcp-provider
+  writeConnectionSecretToRef:
+    name: mayastor-nodepool
+    namespace: default
+
+  forProvider:
+    initialNodeCount: 1
+    cluster: "projects/steady-service-269616/locations/us-central1-c/clusters/cluster-1"
+    config:
+      diskSizeGb: 100
+      diskType: pd-standard
+      imageType: UBUNTU
+      machineType: n2-standard-4 

@@ -1,0 +1,12 @@
+apiVersion: container.gcp.crossplane.io/v1beta1
+kind: GKEClusterClass
+metadata:
+  name: gke-class
+  namespace: default
+specTemplate:
+  forProvider:
+    location: us-central1-c
+  providerRef:
+    name: gcp-provider
+  reclaimPolicy: Delete
+  writeConnectionSecretsToNamespace: default
