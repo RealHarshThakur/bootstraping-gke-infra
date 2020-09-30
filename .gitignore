@@ -1,1 +1,3 @@
 creds.json
+dev.log
+terraform.tfstate
